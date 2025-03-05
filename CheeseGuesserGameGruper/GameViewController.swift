@@ -23,6 +23,7 @@ class AppData{
     static var points = 0
     static var gravity = 0.0
     static var hide = true
+//    static var count = 0
 }
 
 class GameViewController: UIViewController {
