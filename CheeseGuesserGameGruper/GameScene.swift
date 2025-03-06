@@ -18,31 +18,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "cheddar"))
+        cheeses[0].removeFromParent()
+        cheeses[0].position = CGPoint(x: 0, y: 407.5)
+       // cheeses[0].physicsBody = SKPhysicsBody(rectangleOf: cheeses[0].size)
+        
+        cheeses[0].physicsBody?.isDynamic = true
+        //cheeses[1].constraints = []
+        cheeses[0].physicsBody?.affectedByGravity = true
+        cheeses[0].physicsBody?.pinned = false
+        cheeses[0].physicsBody?.allowsRotation = true
+        cheeses[0].physicsBody?.categoryBitMask = 1
+        cheeses[0].physicsBody?.contactTestBitMask = 1
+        cheeses[0].physicsBody?.restitution = 0.0
+        cheeses[0].name = "cheese"
+        self.addChild(cheeses[0])
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "brie"))
         losslabel = self.childNode(withName: "lossLabel") as! SKLabelNode
         scorelabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.node?.name == "cheese" || contact.bodyA.node?.name == "bottomPlank"{
-            //if contact.bodyB.node?.name == "bottomPlank" || contact.bodyB.node?.name == "cheese"{
+        if contact.bodyA.node?.name == "cheese" || contact.bodyB.node?.name == "cheese"{
+            if contact.bodyA.node?.name == "bottomPlank" || contact.bodyB.node?.name == "bottomPlank"{
                 //cheeses.append(self.childNode(withName: "cheese") as! SKSpriteNode)
                 //add child node to the scene when the previous one contacts the bottom plank
                 print("contact")
-            cheeses[1].removeFromParent()
-            cheeses[1].position = CGPoint(x: 0, y: 407.5)
-            cheeses[1].physicsBody = SKPhysicsBody(rectangleOf: cheeses[1].size)
-            cheeses[1].physicsBody = SKPhysicsBody(texture: cheeses[1].texture!, alphaThreshold: 1.0, size: cheeses[1].size)
-            cheeses[1].physicsBody?.isDynamic = true
-            AppData.gravity = 0
-            cheeses[1].constraints = []
-            cheeses[1].physicsBody?.affectedByGravity = true
-            cheeses[1].physicsBody?.allowsRotation = true
-            cheeses[1].physicsBody?.categoryBitMask = 1
-            cheeses[1].physicsBody?.contactTestBitMask = 1
-            self.addChild(cheeses[1])
+                AppData.contactCount += 1
+                
+                if AppData.contactCount == 1{
+                    AppData.cheeseArrCount += 1
+                    print("happening")
+                    cheeses[AppData.cheeseArrCount].removeFromParent()
+                    cheeses[AppData.cheeseArrCount].position = CGPoint(x: 0, y: 407.5)
+                    cheeses[AppData.cheeseArrCount].physicsBody?.isDynamic = true
+                    //cheeses[1].constraints = []
+                    cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = true
+                    cheeses[AppData.cheeseArrCount].physicsBody?.pinned = false
+                    cheeses[AppData.cheeseArrCount].physicsBody?.allowsRotation = true
+                    cheeses[AppData.cheeseArrCount].physicsBody?.categoryBitMask = 1
+                    cheeses[AppData.cheeseArrCount].physicsBody?.contactTestBitMask = 1
+                    cheeses[AppData.cheeseArrCount].physicsBody?.restitution = 0.0
+                    cheeses[AppData.cheeseArrCount].name = "cheese"
+                    cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = false
+                    self.addChild(cheeses[AppData.cheeseArrCount])
+                }
             }
-        //}
+        }
         
     }
     
@@ -55,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Create the sprite node with the texture
         let sprite = SKSpriteNode(texture: texture)
         sprite.size = size
+        sprite.physicsBody = SKPhysicsBody(texture: texture, size: size)
         return sprite
     }
     
@@ -66,5 +88,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             losslabel.isHidden = AppData.hide
         }
         scorelabel.text = "Score: \(AppData.points)"
+        
+        if AppData.points == 2{
+            cheeses[1].physicsBody?.affectedByGravity = true
+        }
+//        if AppData.contactCount >= 1{
+//            cheeses[0].physicsBody?.velocity = CGVector(dx: 0, dy: -60)
+//        }
+        
     }
 }

@@ -69,6 +69,11 @@
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="Gyz-as-K2E" collectionClass="NSMutableArray" id="1cA-sW-NdG"/>
+                        <outletCollection property="buttons" destination="Ukh-DU-egM" collectionClass="NSMutableArray" id="juz-jE-HeR"/>
+                        <outletCollection property="buttons" destination="dZy-FG-jAf" collectionClass="NSMutableArray" id="zaH-yv-Q2C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
