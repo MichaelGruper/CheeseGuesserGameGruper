@@ -33,6 +33,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cheeses[0].name = "cheese"
         self.addChild(cheeses[0])
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "brie"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "asiago"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "burrata"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "colby"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "edan"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "emmental"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "fontina"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "gouda"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "mozzarella"))
         losslabel = self.childNode(withName: "lossLabel") as! SKLabelNode
         scorelabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
     }
