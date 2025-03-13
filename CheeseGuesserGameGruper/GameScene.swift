@@ -10,6 +10,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var gvc : GameViewController!
+    
     var cheeses = [SKSpriteNode]()
     
 //    var cheese : SKSpriteNode!
@@ -18,6 +20,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "cheddar"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "brie"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "asiago"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "burrata"))
+        //cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "colby"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "edan"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "emmental"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "fontina"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "gouda"))
+        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "mozzarella"))
         cheeses[0].removeFromParent()
         cheeses[0].position = CGPoint(x: 0, y: 407.5)
        // cheeses[0].physicsBody = SKPhysicsBody(rectangleOf: cheeses[0].size)
@@ -32,15 +43,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cheeses[0].physicsBody?.restitution = 0.0
         cheeses[0].name = "cheese"
         self.addChild(cheeses[0])
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "brie"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "asiago"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "burrata"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "colby"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "edan"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "emmental"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "fontina"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "gouda"))
-        cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "mozzarella"))
         losslabel = self.childNode(withName: "lossLabel") as! SKLabelNode
         scorelabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
     }
@@ -50,17 +52,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if contact.bodyA.node?.name == "bottomPlank" || contact.bodyB.node?.name == "bottomPlank"{
                 //cheeses.append(self.childNode(withName: "cheese") as! SKSpriteNode)
                 //add child node to the scene when the previous one contacts the bottom plank
-                print("contact")
                 AppData.contactCount += 1
+                print("contact \(AppData.contactCount)")
                 
-                if AppData.contactCount == 1{
+                
+                
                     AppData.cheeseArrCount += 1
-                    print("happening")
-                    cheeses[AppData.cheeseArrCount].removeFromParent()
+                    //print("happening")
+                   // cheeses[AppData.cheeseArrCount].removeFromParent()
+                if AppData.cheeseArrCount < cheeses.count{
+                    AppData.points += 1
                     cheeses[AppData.cheeseArrCount].position = CGPoint(x: 0, y: 407.5)
                     cheeses[AppData.cheeseArrCount].physicsBody?.isDynamic = true
-                    //cheeses[1].constraints = []
-                    cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = true
+                     cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = true
                     cheeses[AppData.cheeseArrCount].physicsBody?.pinned = false
                     cheeses[AppData.cheeseArrCount].physicsBody?.allowsRotation = true
                     cheeses[AppData.cheeseArrCount].physicsBody?.categoryBitMask = 1
@@ -68,11 +72,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     cheeses[AppData.cheeseArrCount].physicsBody?.restitution = 0.0
                     cheeses[AppData.cheeseArrCount].name = "cheese"
                     cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = false
+                   // physicsWorld.gravity.dy = 0
+                   // physicsWorld.gravity.dy = AppData.gravity
+                    cheeses[AppData.cheeseArrCount - 1].name = nil
                     self.addChild(cheeses[AppData.cheeseArrCount])
                 }
+                gvc.generateNames()
+                }
             }
-        }
-        
     }
     
     func createAlphaMaskedSprite(size: CGSize, imageName: String) -> SKSpriteNode {
@@ -97,9 +104,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         scorelabel.text = "Score: \(AppData.points)"
         
-        if AppData.points == 2{
-            cheeses[1].physicsBody?.affectedByGravity = true
-        }
+//        if AppData.points == 2{
+//            cheeses[1].physicsBody?.affectedByGravity = true
+//        }
+        //cheeses[AppData.cheeseArrCount].physicsBody?.affectedByGravity = AppData.isGrav
 //        if AppData.contactCount >= 1{
 //            cheeses[0].physicsBody?.velocity = CGVector(dx: 0, dy: -60)
 //        }
