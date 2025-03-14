@@ -68,11 +68,31 @@
                                     <action selector="guessButton3Action:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0Lu-MA-lZ3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-Cm-4uA">
+                                <rect key="frame" x="47" y="114" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="&lt;--">
+                                    <color key="baseForegroundColor" systemColor="systemGray4Color"/>
+                                    <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOc-RK-AMX">
+                                <rect key="frame" x="295" y="114" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="--&gt;">
+                                    <color key="baseForegroundColor" systemColor="systemGray4Color"/>
+                                    <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="leftButtonOutlet" destination="q0b-Cm-4uA" id="kkC-9z-j5D"/>
+                        <outlet property="rightButtonOutlet" destination="gOc-RK-AMX" id="cSM-Qd-KUP"/>
                         <outletCollection property="buttons" destination="Gyz-as-K2E" collectionClass="NSMutableArray" id="1cA-sW-NdG"/>
                         <outletCollection property="buttons" destination="Ukh-DU-egM" collectionClass="NSMutableArray" id="juz-jE-HeR"/>
                         <outletCollection property="buttons" destination="dZy-FG-jAf" collectionClass="NSMutableArray" id="zaH-yv-Q2C"/>
@@ -102,6 +122,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

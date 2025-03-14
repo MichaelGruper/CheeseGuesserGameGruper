@@ -104,6 +104,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         scorelabel.text = "Score: \(AppData.points)"
         
+     
+        
+        
+        
 //        if AppData.points == 2{
 //            cheeses[1].physicsBody?.affectedByGravity = true
 //        }

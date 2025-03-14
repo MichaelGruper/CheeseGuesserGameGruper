@@ -33,6 +33,10 @@ class GameViewController: UIViewController {
     //button array
     @IBOutlet var buttons: [UIButton]!
     
+    @IBOutlet weak var rightButtonOutlet: UIButton!
+    
+    @IBOutlet weak var leftButtonOutlet: UIButton!
+    
     var gs : GameScene!
     
     var correct1 = false
@@ -45,7 +49,13 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //correct3 = true
+        
+        let lLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(lLongPressDetected))
+        leftButtonOutlet.addGestureRecognizer(lLongPressRecognizer)
+        let rLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(rLongPressDetected))
+        rightButtonOutlet.addGestureRecognizer(rLongPressRecognizer)
+        
+        
           cheeses.append(Cheese(name: "Cheddar", image: UIImage(named: "cheddar")!))
           cheeses.append(Cheese(name: "Brie", image: UIImage(named: "brie")!))
           cheeses.append(Cheese(name: "Asiago", image: UIImage(named: "asiago")!))
@@ -114,6 +124,24 @@ class GameViewController: UIViewController {
         }
     }
     
+    @objc func lLongPressDetected(gesture: UILongPressGestureRecognizer){
+        if gesture.state == .began {
+                   print("Long press began.")
+            gs.cheeses[AppData.cheeseArrCount].physicsBody?.velocity.dx = -50
+               } else if gesture.state == .ended {
+                   print("Long press ended.")
+                   gs.cheeses[AppData.cheeseArrCount].physicsBody?.velocity.dx = 0
+               }
+    }
+    @objc func rLongPressDetected(gesture: UILongPressGestureRecognizer){
+        if gesture.state == .began {
+                   print("Long press began.")
+            gs.cheeses[AppData.cheeseArrCount].physicsBody?.velocity.dx = 50
+               } else if gesture.state == .ended {
+                   print("Long press ended.")
+                   gs.cheeses[AppData.cheeseArrCount].physicsBody?.velocity.dx = 0
+               }
+    }
     
     
     @IBAction func guessButton1Action(_ sender: UIButton) {
