@@ -55,6 +55,9 @@ class GameViewController: UIViewController {
         let rLongPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(rLongPressDetected))
         rightButtonOutlet.addGestureRecognizer(rLongPressRecognizer)
         
+        for i in buttons{
+            i.sizeToFit()
+        }
         
           cheeses.append(Cheese(name: "Cheddar", image: UIImage(named: "cheddar")!))
           cheeses.append(Cheese(name: "Brie", image: UIImage(named: "brie")!))

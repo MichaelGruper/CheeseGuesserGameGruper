@@ -23,7 +23,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "brie"))
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "asiago"))
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "burrata"))
-        //cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "colby"))
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "edan"))
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "emmental"))
         cheeses.append(createAlphaMaskedSprite(size: CGSize(width: 175, height: 175), imageName: "fontina"))
